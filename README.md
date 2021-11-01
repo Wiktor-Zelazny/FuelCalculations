@@ -1,6 +1,7 @@
 # FuelCalculator
+The fuel calculator for launching and landing payload in given gravity using provided formula. The module Calculator https://github.com/Wiktor-Zelazny/FuelCalculations/blob/main/lib/calculator.ex provides three functions get_$operation_fuel_for calculating fuel needed to launch, land or total fuel for launch and land given payload on given celestial bodies. The total fuel load accounts for extra fuel neded to launch mass of fuel that will be used in landing.
 
-**TODO: Add description**
+TODO: Enable Logger for the module(lines for use of Logger are present but commented away until they can be used). 
 
 ## Installation
 
