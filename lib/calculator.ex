@@ -23,13 +23,13 @@ defmodule FuelCalculator.Calculator do
     |> validate_fuel_load()
   end
 
-  def gross_launch_fuel_for(origin_gravity, payload_mass)
+  defp gross_launch_fuel_for(origin_gravity, payload_mass)
       when is_number(origin_gravity) and
              is_number(payload_mass) do
     origin_gravity * payload_mass * 0.042 - 33
   end
 
-  def gross_launch_fuel_for(invalid_gravity, invalid_payload) do
+  defp gross_launch_fuel_for(invalid_gravity, invalid_payload) do
     # Logger.error("Invalid fuel parameters: Origin gravity#{IO.inspect(invalid_gravity)}, Payload: #{IO.inspect(invalid_payload)}")
     {:error, {"Invalid launch parameters", [invalid_gravity, invalid_payload]}}
   end
@@ -55,13 +55,13 @@ defmodule FuelCalculator.Calculator do
     |> validate_fuel_load()
   end
 
-  def gross_landing_fuel_for(destination_gravity, payload_mass)
+  defp gross_landing_fuel_for(destination_gravity, payload_mass)
       when is_number(destination_gravity) and
              is_number(payload_mass) do
     destination_gravity * payload_mass * 0.033 - 42
   end
 
-  def gross_landing_fuel_for(invalid_gravity, invalid_payload) do
+  defp gross_landing_fuel_for(invalid_gravity, invalid_payload) do
     # Logger.error("Invalid fuel parameters: Target gravity#{IO.inspect(invalid_gravity)}, Payload: #{IO.inspect(invalid_payload)}")
     {:error, {"Invalid landing parameters", [invalid_gravity, invalid_payload]}}
   end
@@ -86,7 +86,7 @@ defmodule FuelCalculator.Calculator do
     calculate_total_fuel_for(origin_gravity, destination_gravity, payload_mass)
   end
 
-  def calculate_total_fuel_for(origin_gravity, destination_gravity, payload_mass)
+  defp calculate_total_fuel_for(origin_gravity, destination_gravity, payload_mass)
       when is_number(origin_gravity) and
              is_number(destination_gravity) and
              is_number(payload_mass) do
@@ -101,12 +101,12 @@ defmodule FuelCalculator.Calculator do
     end
   end
 
-  def calculate_total_fuel_for(invalid_gravity_1, invalid_gravity_2, invalid_payload) do
+  defp calculate_total_fuel_for(invalid_gravity_1, invalid_gravity_2, invalid_payload) do
     # Logger.error("Invalid fuel parameters: #{IO.inspect(invalid_gravity_1)}, Target Gravity: #{IO.inspect(invalid_gravity_2)}, Payload: #{IO.inspect(invalid_payload)}")
     {:error, {"Invalid parameters", [invalid_gravity_1, invalid_gravity_2, invalid_payload]}}
   end
 
-  def validate_fuel_load(load) do
+  defp validate_fuel_load(load) do
     case load do
       error = {:error, _} -> error
       fuel_load when fuel_load > 1 -> {:ok, floor(fuel_load)}
@@ -114,7 +114,7 @@ defmodule FuelCalculator.Calculator do
     end
   end
 
-  def get_gravity_for(planet_name) do
+  defp get_gravity_for(planet_name) do
     case planet_name do
       "Earth" -> @earth
       "Mars" -> @mars
